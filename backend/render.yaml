@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: mastercheckAI-backend
+    runtime: python
+    pythonVersion: 3.11
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: HF_TOKEN
+        scope: build
+        sync: false
+      - key: DATABASE_URL
+        value: sqlite:///mastercheck.db
+      - key: DEBUG
+        value: "False"
